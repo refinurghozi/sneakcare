@@ -52,39 +52,132 @@
       </div>
     </nav>
 
-    <!-- Header -->
-    <header class="masthead bg-primary text-white text-center">
-      <div class="container">
-        
-      </div>
-    </header>
 
-    <!-- price Section -->
-    <section id="contact">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">PRICE LIST</h2>
-        <hr class="star-dark mb-5">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-            <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- ORDER BTTON -->
     <section class="bg-primary text-white mb-0" id="about">
       <div class="container">
-        <h2 class="text-center text-uppercase text-white">INTERESTED?</h2>
+        <h2 class="text-center text-uppercase text-white" style="margin-top:50px">ORDER FORM</h2>
         <hr class="star-light mb-5">
 
         <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
-            <i class="fa fa-cart-arrow-down mr-2"></i>
-            CLICK HERE TO ORDER NOW!
-          </a>
+
+          <form action="add.php" method="post" name="form"> <!--class="text-center text-uppercase text-white"-->
+        		<table width="25%" border="0">
+        			<tr>
+        				<td>Nama</td>
+        				<td><input type="text" name="name"></td>
+        			</tr>
+        			<tr>
+        				<td>Alamat</td> <!--mau pake googlemaps-->
+        				<td>
+                  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                  <div id="map"></div>
+                  <script>
+                    // This example adds a search box to a map, using the Google Place Autocomplete
+                    // feature. People can enter geographical searches. The search box will return a
+                    // pick list containing a mix of places and predicted search terms.
+
+                    // This example requires the Places library. Include the libraries=places
+                    // parameter when you first load the API. For example:
+                    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+                    function initAutocomplete() {
+                      var map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: -33.8688, lng: 151.2195},
+                        zoom: 13,
+                        mapTypeId: 'roadmap'
+                      });
+
+                      // Create the search box and link it to the UI element.
+                      var input = document.getElementById('pac-input');
+                      var searchBox = new google.maps.places.SearchBox(input);
+                      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+                      // Bias the SearchBox results towards current map's viewport.
+                      map.addListener('bounds_changed', function() {
+                        searchBox.setBounds(map.getBounds());
+                      });
+
+                      var markers = [];
+                      // Listen for the event fired when the user selects a prediction and retrieve
+                      // more details for that place.
+                      searchBox.addListener('places_changed', function() {
+                        var places = searchBox.getPlaces();
+
+                        if (places.length == 0) {
+                          return;
+                        }
+
+                        // Clear out the old markers.
+                        markers.forEach(function(marker) {
+                          marker.setMap(null);
+                        });
+                        markers = [];
+
+                        // For each place, get the icon, name and location.
+                        var bounds = new google.maps.LatLngBounds();
+                        places.forEach(function(place) {
+                          if (!place.geometry) {
+                            console.log("Returned place contains no geometry");
+                            return;
+                          }
+                          var icon = {
+                            url: place.icon,
+                            size: new google.maps.Size(71, 71),
+                            origin: new google.maps.Point(0, 0),
+                            anchor: new google.maps.Point(17, 34),
+                            scaledSize: new google.maps.Size(25, 25)
+                          };
+
+                          // Create a marker for each place.
+                          markers.push(new google.maps.Marker({
+                            map: map,
+                            icon: icon,
+                            title: place.name,
+                            position: place.geometry.location
+                          }));
+
+                          if (place.geometry.viewport) {
+                            // Only geocodes have viewport.
+                            bounds.union(place.geometry.viewport);
+                          } else {
+                            bounds.extend(place.geometry.location);
+                          }
+                        });
+                        map.fitBounds(bounds);
+                      });
+                    }
+
+                  </script>
+                  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy3YBHJfScaD7SD3wwc2bMB9FSK4KndEw&libraries=places&callback=initAutocomplete"
+                       async defer></script>
+
+
+                </td>
+        			</tr>
+        			<tr>
+        				<td>Jumlah Sepatu</td> <!--mau pake ticker-->
+        				<td><input type="number" name="komentar"></td>
+        			</tr>
+              <tr>
+        				<td>Jenis Service</td> <!--mau pake dropdown-->
+        				<td>
+                  <select>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                  </select>
+        			</tr>
+        			<tr>
+        				<td></td>
+        				<td><input type="submit" name="Submit" value="Add"></td>
+        			</tr>
+        		</table>
+        	</form>
         </div>
       </div>
     </section>
