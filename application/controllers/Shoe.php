@@ -33,5 +33,10 @@ class Shoe extends CI_Controller{
   {
       $this->load->view('admin');
   }
+  function tabeladmin()
+  {
+      $this->load->view('pagadmin/tables');
+      
+  }
 
-}
+  }

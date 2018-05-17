@@ -220,10 +220,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="col-md-12">
                 <div class="juice-container">
 
-                  <form name="mannForm" class="juice-form"
-                        action="https://formspree.io/addRealEmailHere@youremail.com"
-                        onsubmit="return validateForm()"
-                        method="POST">
+                  <form name="mannForm" class="juice-form" action="<?php echo base_url()?>Cform/addorder" method="POST">
                     <div class="col-md-6 form-field nama">
                       <label for="nama">Nama</label>
                       <input type="text" name="nama" placeholder="Nama" >
@@ -234,16 +231,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <div class="col-md-6 form-field jumlah">
                       <label for="jumlah">Jumlah Sepatu</label>
-                      <input type="number" name="jumlah" min="1" max="9" class="form-control" id="number" name="number" data-rule-required="true" aria-required="true" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==1 && event.keyCode!=8) return false;">
+                      <input type="text" name="jumlah" >
                     </div>
                     <div class="col-md-6 form-field jumlah">
                       <label for="nomorhp">Nomor HP</label>
-                      <input type="number" name="jumlah" min="1" max="0899999999999" class="form-control" id="number" name="number" data-rule-required="true" aria-required="true" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==13 && event.keyCode!=8) return false;">
+                      <input type="text" name="nomorhp" >
+                      <!--min="1" max="0899999999999" class="form-control" id="number" name="number" data-rule-required="true" aria-required="true" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==13 && event.keyCode!=8) return false;"-->
                     </div>
                     <div class="col-md-6 form-field service">
-                      <label for="sevice">Jenis Service</label>
+                      <label for="service">Jenis Service</label>
                       <br>
-                      <select>
+                      <select name="service">
                         <option value="fastclean">Fast Clean</option>
                         <option value="deepclean">Deep Clean</option>
                         <option value="unyellowing">Unyellowing</option>

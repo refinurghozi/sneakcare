@@ -7,15 +7,15 @@ class Cadmin extends CI_Controller{
   {
     parent::__construct();
     //Codeigniter : Write Less Do More
-    $this->load->model("Mshoe", "Cadmin");
+    $this->load->model("Mshoe");
     if(!empty($_SESSION['id_user']))
-        redirect('Admin');
+        redirect('Shoe/adminpanel');
   }
 
   function index()
   {
     if($_POST) {
-        $result = $this->Cadmin->validate_admin($_POST);
+        $result = $this->Mshoe->validate_admin($_POST);
         if(!empty($result)) {
             $data =[
                 'username' => $result->username,
@@ -26,7 +26,7 @@ class Cadmin extends CI_Controller{
             $user= array(
               'user' => $this->session->userdata('user')
             );
-            redirect('Shoe/adminpanel');
+            redirect(base_url('Shoe/adminpanel'));
 
         } else {
             $this->session->set_flashdata('flash_data', 'Username or password is wrong!');
