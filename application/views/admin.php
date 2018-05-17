@@ -1,3 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+    if (!isset($_SESSION['id_user'])) {
+    redirect(base_url("/Welcome/masukadmin"));
+}
+ ?>
+
+
+yay

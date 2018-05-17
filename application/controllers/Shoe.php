@@ -25,5 +25,13 @@ class Shoe extends CI_Controller{
   {
       $this->load->view('order');
   }
+  function masuk()
+  {
+      $this->load->view('masuk');
+  }
+  function adminpanel()
+  {
+      $this->load->view('admin');
+  }
 
 }
